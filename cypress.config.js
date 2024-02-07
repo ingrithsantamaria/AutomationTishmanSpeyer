@@ -5,7 +5,7 @@ module.exports = defineConfig({
   viewportWidth: 1920,
   viewportHeight: 1080,
   e2e: {
-    baseUrl: "RENAME ME!",
+    baseUrl: "https://yourstudio.staging.tishmanspeyer.com/",
     specPattern: "./cypress/e2e/pages/*.cy.js",
     setupNodeEvents(on, config) {
     },
