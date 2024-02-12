@@ -1,4 +1,4 @@
-import { clickAndValidateIconHome, clickAndValidateCoworkingButton } from "../components/global-components/header-component";
+import { clickAndValidateIconHome, clickAndValidateCoworkingButton, clickAndValidateOfficeSuites, clickAndValidateMeetingEvents, clickAndValidateVirtualOfficeButton, clickAndValidateOurCompanyButton } from "../components/global-components/header-component";
 describe('RENAME ME!', () => {
 
   beforeEach(() => {
@@ -12,6 +12,18 @@ describe('RENAME ME!', () => {
     //clickAndValidateIconHome()
 
     //User clicks on CoworkingButton header
-    //clickAndValidateCoworkingButton()
+    // clickAndValidateCoworkingButton()
+
+    //User clicks on Office Suites Button
+    // clickAndValidateOfficeSuites()
+
+    //User clicks on Meetings Buttons
+    // clickAndValidateMeetingEvents()
+
+    //User clicks on Virtual Office Button
+    // clickAndValidateVirtualOfficeButton()
+
+    //User clicks on Our Company Button
+    //clickAndValidateOurCompanyButton()
   })
 })
