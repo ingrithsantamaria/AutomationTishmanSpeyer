@@ -6,7 +6,7 @@ module.exports = defineConfig({
   viewportHeight: 1080,
   e2e: {
     pageLoadTimeout: 1200000,
-    baseUrl: "https://yourstudio.staging.tishmanspeyer.com/new",
+    baseUrl: "https://yourstudio.staging.tishmanspeyer.com/new/",
     specPattern: "./cypress/e2e/pages/*.cy.js",
     setupNodeEvents(on, config) {
     },

@@ -1,7 +1,5 @@
-const { productDataDesk, productMeetingRoom } = require("../common/data-provider")
-
+const { routeProductDesk, routeProductMeeting } = require("../common/data-provider")
 class productListingPage {
-
     elements = {
           getHeader : () => cy.get("#page-header"),
           getBookSpaceTitle : () => cy.contains('h1', 'Book a Space'),
@@ -17,14 +15,11 @@ class productListingPage {
     selectProductDesk = (route) => {
       cy.get(`a[href="/new/${route}/desk"]`).click({force:true, multiple: true})
     }
-
-//     selectMeetingRoom = () => {
-//       this.elements.getMeetingRoomButton().should("be.visible").click({force:true})
-//     }
-//     selectProductMeeting = () => {
-//       const productDesk = productDataDesk.DESK_AT_11_WEST_42ND_STREET
-//       const productMeeting = productMeetingRoom.KOREAN_TOWN
-//       this.elements.getProductsMeeting().find('a[href="/new/"' + productDesk + productMeeting ).click({force:true})
-//     }
+    selectMeetingRoom = () => {
+      this.elements.getMeetingRoomButton().should("be.visible").click({force:true})
+    }
+    selectProductMeeting = (route) => {
+      cy.get(`a[href="/new/${route}"]`).click({force:true, multiple: true})
+    }
   }
   module.exports = new productListingPage();

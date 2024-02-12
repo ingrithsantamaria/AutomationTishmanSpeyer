@@ -41,8 +41,8 @@ export const routeProductMeeting = {
     c5C: "the-jacx/5C",
     NOLITA: "1230-aoa/nolita",
     ROOM_2A: "175-varick/room_2a",
-    getProductsMeetings: () => {
-        return [
+    getRandomRouteProductsMeetings: () => {
+        return faker.helpers.arrayElement([
             routeProductMeeting.KOREAN_TOWN,
             routeProductMeeting.ROOM_4C,
             routeProductMeeting.BREAKOUT,
@@ -59,6 +59,6 @@ export const routeProductMeeting = {
             routeProductMeeting.c5C,
             routeProductMeeting.NOLITA,
             routeProductMeeting.ROOM_2A
-        ]
+        ])
     }
 }
