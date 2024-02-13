@@ -10,16 +10,19 @@ import {
   validateEmailGeneralInquiresAppOpened,
   clickPhoneNumberLink,
   validateEmailBrokersAppOpened,
-  openAndValidateNewWindowIntagram
+  openAndValidateNewWindowIntagram,
+  openAndValidateNewWindowFacebook,
+  openAndValidateNewWindowLinkedin,
+  openAndValidateNewWindowRulesAndRegulations,
+  openAndValidateNewWindowPrivacyPolicy,
+  openAndValidateNewWindowSitemap,
+  verifyCopyright
 } from "../components/global-components/footer-component";
-describe("RENAME ME!", () => {
+describe("Click and validate links footer", () => {
   beforeEach(() => {
     cy.visit("/spaces?region=new-york");
     cy.wait(15000);
     cy.acceptCookiesIfExists();
-  });
-  it("User clicks on icon instagram Footer", () => {
-    openAndValidateNewWindowIntagram();
   });
   it("User clicks on link coworking footer", () => {
     openAndValidateNewWindowCoworking();
@@ -54,4 +57,26 @@ describe("RENAME ME!", () => {
   it("User clicks on link Email Brokers Footer", () => {
     validateEmailBrokersAppOpened();
   });
+  it("User clicks on icon instagram Footer", () => {
+    openAndValidateNewWindowIntagram();
+  });
+  it("User clicks on icon Facebook Footer", () => {
+    openAndValidateNewWindowFacebook();
+  });
+  it("User clicks on icon Linkedin Footer", () => {
+    openAndValidateNewWindowLinkedin();
+  });
+  it("User clicks on link Rules And Regulations footer", () => {
+    openAndValidateNewWindowRulesAndRegulations();
+  })
+  it("User clicks on link Privacy Policy footer", () => {
+    openAndValidateNewWindowPrivacyPolicy();
+    cy.url().should('include','privacy-policy')
+  })
+  it("User clicks on link Sitemap footer", () => {
+    openAndValidateNewWindowSitemap();
+  })
+  it("Verify copyRight footer", () => {
+    verifyCopyright();
+  })
 });

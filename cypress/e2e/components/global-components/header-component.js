@@ -23,7 +23,7 @@ class header {
   }
   clickAndValidateIconHome = () => {
     this.elements.getIcon().should("be.visible").click({ multiple: true });
-    //Asersiones que funcionan, pero fallan por problemas en el sitio STG
+    //Aserciones que funcionan, pero fallan por problemas en el sitio STG
     // const title = "Book a Space";
     // cy.title().should("include", title);
   };
@@ -43,14 +43,14 @@ class header {
   clickAndValidateOfficeSuites = () => {
     this.elements.getOfficeSuites().should("be.visible").click();
     cy.url().should("include", "studio-private");
-    //Asersiones que funcionan, pero fallan por problemas en el sitio STG
+    //Aserciones que funcionan, pero fallan por problemas en el sitio STG
     // const text = "Amenities & Features ";
     // cy.get("div.wp-block-column h3").eq(0).should("have.text", text);
   };
   clickAndValidateMeetingEvents = () => {
     this.elements.getMeetingEventsButton().should("be.visible").click();
     cy.url().should("include", "studio-gather");
-    //Asersiones que funcionan, pero fallan por problemas en el sitio STG
+    //Aserciones que funcionan, pero fallan por problemas en el sitio STG
     // const text = "Exceptional spaces for unrivaled events ";
     // cy.contains("h2", text);
   };
@@ -63,7 +63,7 @@ class header {
   clickAndValidateOurCompanyButton = () => {
     this.elements.getOurCompanyButton().should("be.visible").click();
     cy.url().should("include", "about-us");
-    //Asersiones que funcionan, pero fallan por problemas en el sitio STG
+    //Aserciones que funcionan, pero fallan por problemas en el sitio STG
     // const title = "About Us";
     // cy.title().should("include", title);
   };
