@@ -1,8 +1,5 @@
 import { faker } from '@faker-js/faker'
 class checkout {
-      navigate() {
-            cy.visit("/new/300-park/desk");
-      }
     elements = {
 
           getH1LabelByText : (text) => cy.contains('h1', text),
