@@ -10,7 +10,9 @@ class contact {
     getTextArea: () => cy.get("textarea#assistDetails-field"),
     getCheckBoxReceiveMail: () => cy.get('button[role="switch"]'),
     getListLocation: () => cy.get('button[aria-haspopup="listbox"]'),
-    getSubmit: () => cy.get('button[type="submit"]')
+    getSubmit: () => cy.get('button[type="submit"]'),
+    getMessageSuccess: () => cy.get('div[class*="bg-feedback-positive-"]'),
+    getMessageError: () => cy.get('div#tm-contact-error-notification')
   };
   validateBodyContactUs = () => {
     cy.get("body").contains("h1", "Contact Us");
@@ -49,10 +51,49 @@ class contact {
     this.elements
       .getPhoneNumberField()
       .should("be.visible")
-      .type(faker.phone.number());
+      .type(faker.string.numeric('(000) 000-0000'));
     this.selectRamdonNavBar();
     this.elements.getSubmit().should('be.visible').click({force: true})
+    this.elements.getMessageSuccess().should('be.visible').contains('button', 'Dismiss').click()
   };
+  formWithEmptyFields = () => {
+      this.elements
+        .getLastNameField()
+        .should("be.visible")
+        .type(faker.person.lastName());
+      this.elements
+        .getEmailField()
+        .should("be.visible")
+        .type(faker.internet.email());
+      this.elements
+        .getPhoneNumberField()
+        .should("be.visible")
+        .type(faker.string.numeric('(000) 000-0000'));
+      this.selectRamdonNavBar();
+      this.elements.getSubmit().should('be.visible').click()
+      this.elements.getMessageError().should('be.visible').contains('a', 'Go to error').click({multiple:true})
+    };
+    formatEmailIncorrect = () => {
+      this.elements
+      .getFirstNameField()
+      .should("be.visible")
+      .type(faker.person.firstName());
+      this.elements
+        .getLastNameField()
+        .should("be.visible")
+        .type(faker.person.lastName());
+      this.elements
+        .getEmailField()
+        .should("be.visible")
+        .type(faker.internet.displayName());
+      this.elements
+        .getPhoneNumberField()
+        .should("be.visible")
+        .type(faker.string.numeric('(000) 000-0000'));
+      this.selectRamdonNavBar();
+      this.elements.getSubmit().should('be.visible').click()
+      this.elements.getMessageError().should('be.visible').contains('a', 'Go to error').click({multiple:true})
+    };
   selectRamdonNavBar = () => {
     const randomOptionNavBar =
       Math.random() < 0.5
