@@ -1,36 +1,41 @@
-import { routeProductDesk, routeProductMeeting } from "../components/common/data-provider";
-import {selectDesk, selectProductDesk, selectMeetingRoom,selectProductMeeting, clickBookSpaceButton} from "../components/product-listing-page/product-listing-page-component";
-//import { productDataDesk } from "../components/common/data-provider";
-describe('RENAME ME!', () => {
+import {
+  clickAndValidateDeskButton,
+  clickAndValidateMeetingRoomButton,
+  clickAndValidateEventSpaceButton,
+  clickAndValidateOfficeButton,
+  clickAndValidateSuiteButton,
+  selectProductDesk,
+  selectProductMeeting,
+} from "../components/product-listing-page/product-listing-page-component";
+describe("RENAME ME!", () => {
   beforeEach(() => {
-    //VISIT GOES HERE.
-    cy.on("uncaught:exception", (err, runnable) => {
-      return false;
-    });
-    // cy.clearCookies()
-    // cy.clearLocalStorage()
-    cy.acceptCookiesIfExists()
-    cy.visit("/spaces?region=new-york")
-    cy.wait(15000)
+    cy.acceptCookiesIfExists();
+    cy.visit("/spaces?region=new-york");
+    cy.wait(15000);
   });
-  it('Home Desk', () => {
-    selectDesk()
-    cy.url().should('include', "&type=hot_desk")
-  })
-  it('Select Product', () => {
-    selectDesk()
-    cy.wait(15000)
-    let route = routeProductDesk.gerRandomRouteProduct()
-    selectProductDesk(route)
-  })
-  it('Home Meeting Room', () => {
-    selectDesk()
-    cy.url().should('include', "&type=hot_desk")
-  })
-  it('Select Product Meeting Room', () => {
-    let route = routeProductMeeting.getRandomRouteProductsMeetings()
-    selectMeetingRoom()
-    cy.wait(15000)
-    selectProductMeeting(route)
-  })
-})
+  it("User clicks on Desk Button", () => {
+    clickAndValidateDeskButton();
+  });
+  // it("Select Product Desk", () => {
+  //   clickAndValidateDeskButton();
+  //   cy.wait(15000);
+  //   selectProductDesk();
+  // });
+  it("User clicks on Meeting Room", () => {
+    clickAndValidateMeetingRoomButton();
+  });
+  // it("Select Product Meeting Room", () => {
+  //   clickAndVAlidateMeetingRoom();
+  //   cy.wait(15000);
+  //   selectProductMeeting();
+  // });
+  it("User clicks on Event Space Button", () => {
+    clickAndValidateEventSpaceButton();
+  });
+  it("User clicks on Office Button", () => {
+    clickAndValidateOfficeButton();
+  });
+  it("User clicks on Suite Button", () => {
+    clickAndValidateSuiteButton();
+  });
+});

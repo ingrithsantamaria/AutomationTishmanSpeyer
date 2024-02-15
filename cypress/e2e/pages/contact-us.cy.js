@@ -1,4 +1,4 @@
-import { validateBodyContactUs, fillContactUsInformation, formWithEmptyFields,formatEmailIncorrect } from "../components/contact-us-page/contact-us-component";
+import { validateBodyContactUs, fillContactUsInformation, formWithEmptyFields,formatEmailIncorrect, formatPhoneNumberIncorrect } from "../components/contact-us-page/contact-us-component";
 describe('RENAME ME!', () => {
   beforeEach(() => {
     cy.visit("/contact");
@@ -16,6 +16,9 @@ describe('RENAME ME!', () => {
     formWithEmptyFields()
   })
   it('Incorrect Email format"', () => {
-    formWithEmptyFields()
+    formatEmailIncorrect()
+  })
+  it('Incorrect Phone Number format"', () => {
+    formatPhoneNumberIncorrect()
   })
 })

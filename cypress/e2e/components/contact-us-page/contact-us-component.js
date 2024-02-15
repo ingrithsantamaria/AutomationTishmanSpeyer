@@ -94,6 +94,27 @@ class contact {
       this.elements.getSubmit().should('be.visible').click()
       this.elements.getMessageError().should('be.visible').contains('a', 'Go to error').click({multiple:true})
     };
+    formatPhoneNumberIncorrect = () => {
+      this.elements
+      .getFirstNameField()
+      .should("be.visible")
+      .type(faker.person.firstName());
+      this.elements
+        .getLastNameField()
+        .should("be.visible")
+        .type(faker.person.lastName());
+      this.elements
+        .getEmailField()
+        .should("be.visible")
+        .type(faker.internet.email());
+      this.elements
+        .getPhoneNumberField()
+        .should("be.visible")
+        .type(faker.phone.number());
+      this.selectRamdonNavBar();
+      this.elements.getSubmit().should('be.visible').click()
+      this.elements.getMessageError().should('be.visible').contains('a', 'Go to error').click({multiple:true})
+    };
   selectRamdonNavBar = () => {
     const randomOptionNavBar =
       Math.random() < 0.5
