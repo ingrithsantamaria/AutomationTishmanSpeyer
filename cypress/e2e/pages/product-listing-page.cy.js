@@ -4,8 +4,10 @@ import {
   clickAndValidateEventSpaceButton,
   clickAndValidateOfficeButton,
   clickAndValidateSuiteButton,
-  selectProductDesk,
-  selectProductMeeting,
+  validateSpacesReturnResults,
+  compareNumberResults,
+  verifyChangesElements,
+  compareElements,
 } from "../components/product-listing-page/product-listing-page-component";
 describe("RENAME ME!", () => {
   beforeEach(() => {
@@ -13,22 +15,16 @@ describe("RENAME ME!", () => {
     cy.visit("/spaces?region=new-york");
     cy.wait(15000);
   });
+  it("User clicks on Toogle and sees the updates products ", () => {
+    verifyChangesElements();
+    compareElements();
+  });
   it("User clicks on Desk Button", () => {
     clickAndValidateDeskButton();
   });
-  // it("Select Product Desk", () => {
-  //   clickAndValidateDeskButton();
-  //   cy.wait(15000);
-  //   selectProductDesk();
-  // });
   it("User clicks on Meeting Room", () => {
     clickAndValidateMeetingRoomButton();
   });
-  // it("Select Product Meeting Room", () => {
-  //   clickAndVAlidateMeetingRoom();
-  //   cy.wait(15000);
-  //   selectProductMeeting();
-  // });
   it("User clicks on Event Space Button", () => {
     clickAndValidateEventSpaceButton();
   });
@@ -37,5 +33,9 @@ describe("RENAME ME!", () => {
   });
   it("User clicks on Suite Button", () => {
     clickAndValidateSuiteButton();
+  });
+  it("Validate number of results displayed in each type of space", () => {
+    validateSpacesReturnResults();
+    compareNumberResults();
   });
 });
