@@ -7,8 +7,11 @@ class productListingPage {
     getEventSpaceButton: () => cy.get('div[class*="border-neutrals-"]').eq(1),
     getOfficeButton: () => cy.get('svg[fill="none"]').eq(3),
     getSuiteButton: () => cy.get('div[class*="border-neutrals-"]').eq(4),
-    getSwitchInstatBook: () => cy.get('div[id="or-filter-section-instant-book-switch-desktop"] label'),
-    // getListProducts: () => cy.get('div.pb-10 pt-8')
+    getSwitchInstatBook: () =>
+      cy.get('div[id="or-filter-section-instant-book-switch-desktop"] label'),
+    getComboCityButton: () => cy.get('button[type="button"] div').eq(0),
+    getBuildingButton: () =>
+      cy.get('div[id="or-filter-section-buildings-dropdown"] div').eq(0),
   };
   clickAndValidateDeskButton = () => {
     this.elements.getDeskButton().should("be.visible").click({ force: true });
@@ -53,24 +56,101 @@ class productListingPage {
     });
   };
   get elementsWithTag() {
-    return cy.get('div[data-product=true]').contains('div', 'Instant book')
+    return cy.get("div[data-product=true]").contains("div", "Instant book");
   }
   verifyChangesElements = () => {
-    this.elements.getSwitchInstatBook().click()
-    const tag = 'Instant book'
-    return this.elementsWithTag.invoke('text').as('elementsBefore').then(() => {
-      this.elements.getSwitchInstatBook().click()
-      this.elementsWithTag.invoke('text').as('elementsAfter')
-      this.elementsWithTag.filter(`:contains('${tag}')`).as('filteredElements')
-    })
+    this.elements.getSwitchInstatBook().should("be.visible").click();
+    const tag = "Instant book";
+    return this.elementsWithTag
+      .invoke("text")
+      .as("elementsBefore")
+      .then(() => {
+        this.elements.getSwitchInstatBook().click();
+        this.elementsWithTag.invoke("text").as("elementsAfter");
+        this.elementsWithTag
+          .filter(`:contains('${tag}')`)
+          .as("filteredElements");
+      });
   };
   compareElements = () => {
     cy.get("@elementsBefore").then((elementsBefore) => {
-      cy.get("@filteredElements").invoke('text').then((textFiltered) => {
-        expect(elementsBefore.trim()).not.to.eq('')
-        expect(textFiltered).to.include(elementsBefore.trim())
-      });
+      cy.get("@filteredElements")
+        .invoke("text")
+        .then((textFiltered) => {
+          expect(elementsBefore.trim()).not.to.eq("");
+          expect(textFiltered).to.include(elementsBefore.trim());
+        });
     });
+  };
+  ListCities = () => {
+    return [
+      "New York",
+      "Los Angeles",
+      "Washington DC",
+      "Boston",
+      "Chicago",
+      "San Francisco",
+      "Brasilia",
+    ];
+  };
+  optionsBuildingsByCity = () => {
+    const buildingsMap = new Map();
+    buildingsMap.set("New York", [
+      "View All",
+      "The Spiral",
+      "The JACX",
+      "1230 Sixth Avenue",
+      "1270 Sixth Avenue",
+      "600 Fifth Avenue",
+      "45 Rockefeller Plaza",
+      "Studio Grand Central",
+      "300 Park Avenue",
+      "11 West 42nd Street",
+      "CitySpire",
+      "175 Varick Street",
+    ]);
+    buildingsMap.set("Los Angeles", ["Studio Beverly Hills"]);
+    buildingsMap.set("Washington DC", ["900 19th Street"]);
+    buildingsMap.set("Boston", ["125 High Street"]);
+    buildingsMap.set("Chicago", ["The Franklin"]);
+    buildingsMap.set("San Francisco", [
+      "View All",
+      "595 Market Street",
+      "333 Bush Street",
+    ]);
+    return buildingsMap;
+  };
+  verifyCitiesCombo = () => {
+    this.elements.getComboCityButton().click();
+    return cy
+      .get("ul")
+      .find("li[role=option]")
+      .each(($option) => {
+        const city = $option.text().trim();
+        expect(this.ListCities()).to.include(city);
+      });
+  };
+  verifyBuildingsByCity = () => {
+    this.ListCities().forEach((city) => {
+      this.selectCityToCheckOptionsBuildings(city);
+    });
+  };
+  selectCityToCheckOptionsBuildings = (city) => {
+    this.elements.getComboCityButton().contains(city).click();
+    cy.get("body").click();
+    cy.wait(5000);
+    this.verifyOptionsBuildingsCombo(city);
+    cy.get("body").click();
+  };
+  verifyOptionsBuildingsCombo = (city) => {
+    const expectedOptions = this.optionsBuildingsByCity().get(city);
+    this.elements.getBuildingButton().click();
+    cy.get("ul")
+      .find("li[role=option]")
+      .each(($option) => {
+        const opcion = $option.text().trim();
+        expect(expectedOptions).to.include(opcion);
+      });
   };
 }
 module.exports = new productListingPage();

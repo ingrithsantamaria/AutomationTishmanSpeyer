@@ -8,6 +8,8 @@ import {
   compareNumberResults,
   verifyChangesElements,
   compareElements,
+  verifyCitiesCombo,
+  verifyBuildingsByCity
 } from "../components/product-listing-page/product-listing-page-component";
 describe("RENAME ME!", () => {
   beforeEach(() => {
@@ -15,9 +17,8 @@ describe("RENAME ME!", () => {
     cy.visit("/spaces?region=new-york");
     cy.wait(15000);
   });
-  it("User clicks on Toogle and sees the updates products ", () => {
-    verifyChangesElements();
-    compareElements();
+  it("Verify building options by city", () => {
+    verifyBuildingsByCity();
   });
   it("User clicks on Desk Button", () => {
     clickAndValidateDeskButton();
@@ -34,7 +35,15 @@ describe("RENAME ME!", () => {
   it("User clicks on Suite Button", () => {
     clickAndValidateSuiteButton();
   });
+  it("User clicks on Toogle and sees the updates products ", () => {
+    verifyChangesElements();
+    compareElements();
+  });
+  it("User clicks on any type space and sees all the cities", () => {
+    verifyCitiesCombo();
+  });
   it("Validate number of results displayed in each type of space", () => {
+    clickAndValidateMeetingRoomButton()
     validateSpacesReturnResults();
     compareNumberResults();
   });
