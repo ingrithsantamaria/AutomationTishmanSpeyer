@@ -13,9 +13,9 @@ import {
 } from "../components/product-listing-page/product-listing-page-component";
 describe("RENAME ME!", () => {
   beforeEach(() => {
-    cy.acceptCookiesIfExists();
     cy.visit("/spaces?region=new-york");
     cy.wait(15000);
+    cy.acceptCookiesIfExists()
   });
   it("Verify building options by city", () => {
     verifyBuildingsByCity();
