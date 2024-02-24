@@ -4,7 +4,7 @@ describe('RENAME ME!', () => {
   beforeEach(() => {
     cy.visit("/the-spiral/birch");
     cy.acceptCookiesIfExists()
-    cy.wait(15000);
+    //cy.wait(15000);
   });
   it('User views the right panel', () => {
     productDetail.validateRightPanelPrice()
@@ -20,5 +20,15 @@ describe('RENAME ME!', () => {
   })
   it('User views the improvements in the form ', () => {
     productDetail.validateFormItems()
+  })
+  it('User displays the duration option in the right panel', () => {
+    productDetail.randomOptionSelectDuration()
+  })
+  it('User selects a time', () => {
+    productDetail.selectRandomNavbar()
+    productDetail.selectRandomTime()
+  })
+  it('User selects Additional Services', () => {
+    productDetail.validateAndClickAdditionalService()
   })
 })

@@ -1,3 +1,4 @@
+import { faker } from "@faker-js/faker";
 export class productDetailedPage {
     elements = {
           getProductDescriptionTitle : () => cy.get('[id="or-product-description-block-title"]'),
@@ -5,6 +6,14 @@ export class productDetailedPage {
           getProductDescriptionText : () => cy.get('div[id="or-product-description-block-body"] p'),
           getProductDescriptionItems: () => cy.get('div#or-product-description-block-features'),
           getProductRightPanelPrice: () => cy.get('div[class*="border-neutrals-"]').eq(0),
+          getProductRightPanelCalendar: () => cy.get('button[name="date"]'),
+          getProductRightPanelDuration: () => cy.get('button[aria-haspopup="listbox"]'),
+          getNavBarOption1: () => cy.contains('span', 'Upcoming'),
+          getNavBarOption2: () => cy.contains('span', 'Morning'),
+          getNavBarOption3: () => cy.contains('span', 'Afternoon'),
+          getCheckBoxAdditionalService: () => cy.get('button[role="switch"]'),
+          getTextAreaCheckAdditionalService: () => cy.get('textarea#additionalServices-field'),
+          getInquireButton: () => cy.contains('button', 'Inquire'),
     }
     validateFormTitle = () => {
       this.elements.getProductDescriptionTitle().should('be.visible')
@@ -34,6 +43,48 @@ export class productDetailedPage {
       ];
       rightPanelPrice.forEach((value) => {
         cy.get('p').should('contain', value)
+      })
+    }
+    validateAndClickRightPanelCalendar = () => {
+      this.elements.getProductRightPanelCalendar().should('be.visible').click()
+      cy.get('td[role="presentation"]').eq(2).should('be.visible')
+    }
+    get optionsSelectDuration() {
+      return cy.get('ul').find('li[role=option]')
+    }
+    randomOptionSelectDuration = () => {
+      this.elements.getProductRightPanelDuration().click();
+      this.optionsSelectDuration.then((optionsSelectDuration) => {
+        const randomOptions = Cypress._.sample(optionsSelectDuration);
+        randomOptions.click();
+      });
+    };
+    selectRandomNavbar = () => {
+      cy.get('button[role=tab]').then((navbarElements) => {
+        const navbarIndex = Cypress._.random(0, Math.min(2, navbarElements.length - 1));
+        const navbar = navbarElements.eq(navbarIndex);
+        cy.wrap(navbar).click(); 
+      });
+    }
+    selectRandomTime() {
+      cy.get('div.outline-none').then((botonElements) => {
+        const botonIndex = Cypress._.random(0, botonElements.length - 1);
+        //const boton = botonElements.eq(botonIndex);
+        cy.get(botonElements[botonIndex]).click({force:true});
+      });
+    }
+    validateAndClickAdditionalService = () => {
+      this.elements.getCheckBoxAdditionalService().should('be.visible').click()
+      cy.get('div.text-neutrals-800').should('not.be.empty')
+      this.elements.getTextAreaCheckAdditionalService().should('be.visible').type(faker.lorem.paragraph(3, "<br/>\n"));
+    }
+    validateAndClickInquireButton = () => {
+      this.elements.getInquireButton().should('be.visible').click()
+      cy.url().then((url) => {
+        expect(url).to.include('contact?')
+        expect(url).to.include('building=the-spiral')
+        expect(url).to.include('submissionType=Pricing')
+        expect(url).to.include('')
       })
     }
   }
