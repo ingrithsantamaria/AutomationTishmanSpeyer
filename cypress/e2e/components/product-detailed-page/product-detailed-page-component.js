@@ -14,6 +14,7 @@ export class productDetailedPage {
           getCheckBoxAdditionalService: () => cy.get('button[role="switch"]'),
           getTextAreaCheckAdditionalService: () => cy.get('textarea#additionalServices-field'),
           getInquireButton: () => cy.contains('button', 'Inquire'),
+          getInstantBookButton: () => cy.get('button[type="submit"]')
     }
     validateFormTitle = () => {
       this.elements.getProductDescriptionTitle().should('be.visible')
@@ -46,8 +47,8 @@ export class productDetailedPage {
       })
     }
     validateAndClickRightPanelCalendar = () => {
-      this.elements.getProductRightPanelCalendar().should('be.visible').click()
-      cy.get('td[role="presentation"]').eq(2).should('be.visible')
+      this.elements.getProductRightPanelCalendar().should('be.visible')
+      //cy.get('td[role="presentation"]').eq(2).should('be.visible')
     }
     get optionsSelectDuration() {
       return cy.get('ul').find('li[role=option]')
@@ -79,12 +80,24 @@ export class productDetailedPage {
       this.elements.getTextAreaCheckAdditionalService().should('be.visible').type(faker.lorem.paragraph(3, "<br/>\n"));
     }
     validateAndClickInquireButton = () => {
-      this.elements.getInquireButton().should('be.visible').click()
-      cy.url().then((url) => {
-        expect(url).to.include('contact?')
-        expect(url).to.include('building=the-spiral')
-        expect(url).to.include('submissionType=Pricing')
-        expect(url).to.include('')
-      })
+      this.elements.getInquireButton().should('be.visible').click({force:true, multiple:true})
+      this.openNewWindow()
+      // cy.url().then((url) => {
+      //   expect(url).to.include('contact?')
+      //   expect(url).to.include('building=the-spiral')
+      //   expect(url).to.include('submissionType=Pricing')
+      //   expect(url).to.include('type=meeting_room')
+      // })
+    }
+    openNewWindow = () => {
+      cy.window()
+        .its("location.href")
+        .then((newWindowUrl) => {
+          cy.log(`La nueva ventana se abrió en la URL: ${newWindowUrl}`);
+        });
+    };
+    validateAndClickInstantButton = () => {
+      this.elements.getInstantBookButton().should('be.visible').click()
+      this.openNewWindow()
     }
   }

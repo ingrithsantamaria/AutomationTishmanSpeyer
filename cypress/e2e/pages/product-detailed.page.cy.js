@@ -6,6 +6,7 @@ describe('RENAME ME!', () => {
     cy.acceptCookiesIfExists()
     //cy.wait(15000);
   });
+ 
   it('User views the right panel', () => {
     productDetail.validateRightPanelPrice()
   })
@@ -30,5 +31,13 @@ describe('RENAME ME!', () => {
   })
   it('User selects Additional Services', () => {
     productDetail.validateAndClickAdditionalService()
+  })
+  it('User clicks on Inquire Button', () => {
+    productDetail.validateAndClickInquireButton()
+  })
+  it('User clicks on Instant Book Button', () => {
+    productDetail.selectRandomNavbar()
+    productDetail.selectRandomTime()
+    productDetail.validateAndClickInstantButton()
   })
 })
