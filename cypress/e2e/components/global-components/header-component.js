@@ -1,4 +1,4 @@
-export class header {
+class header {
   static textOfficeSuites = "body";
   elements = {
     //getIcon : () => cy.get('[alt="Studio by Tishman Speyer"]'),

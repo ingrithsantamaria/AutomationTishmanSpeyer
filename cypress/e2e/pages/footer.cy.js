@@ -48,6 +48,9 @@ describe("Click and validate links footer", () => {
   it("User clicks on link Contact Us Footer", () => {
     openAndValidateNewWindowContactUs();
   });
+  it("Verify copyRight footer", () => {
+    verifyCopyright();
+  })
   it("User clicks on link Email Genaral inquires Footer", () => {
     validateEmailGeneralInquiresAppOpened();
   });
@@ -76,7 +79,5 @@ describe("Click and validate links footer", () => {
   it("User clicks on link Sitemap footer", () => {
     openAndValidateNewWindowSitemap();
   })
-  it("Verify copyRight footer", () => {
-    verifyCopyright();
-  })
+  
 });

@@ -34,11 +34,14 @@ class productListingPage {
   clickAndValidateSuiteButton = () => {
     this.elements.getSuiteButton().should("be.visible").click({ force: true });
   };
+  selectSpaceByIndex(index) {
+    cy.get('button.group div').eq(index).click()
+  }
   get quantityResultsByPage() {
-    return cy.get("p.inline");
+    return cy.get('p.inline').invoke('text')
   }
   validateSpacesReturnResults = () => {
-    // this.elements.getMeetingRoomButton().click();
+     this.elements.getDeskButton().click();
     this.quantityResultsByPage
       .invoke("text")
       .as("resultsBefore")
@@ -59,7 +62,6 @@ class productListingPage {
     return cy.get("div[data-product=true]").contains("div", "Instant book");
   }
   verifyChangesElements = () => {
-    this.elements.getSwitchInstatBook().should("be.visible").click();
     const tag = "Instant book";
     return this.elementsWithTag
       .invoke("text")
@@ -136,8 +138,8 @@ class productListingPage {
     });
   };
   selectCityToCheckOptionsBuildings = (city) => {
-    this.elements.getComboCityButton().contains(city).click();
-    cy.get("body").click();
+    this.elements.getComboCityButton().click();
+    cy.get("ul").find("li[role=option]").contains(city).click()
     cy.wait(5000);
     this.verifyOptionsBuildingsCombo(city);
     cy.get("body").click();

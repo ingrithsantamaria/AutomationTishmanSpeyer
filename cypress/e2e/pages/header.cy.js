@@ -1,5 +1,11 @@
-import { header } from "../components/global-components/header-component";
-const headerPage = new header()
+import {
+  clickAndValidateIconHome,
+  clickAndValidateCoworkingButton,
+  clickAndValidateOfficeSuites,
+  clickAndValidateMeetingEvents,
+  clickAndValidateVirtualOfficeButton,
+  clickAndValidateOurCompanyButton,
+} from "../components/global-components/header-component";
 describe("RENAME ME!", () => {
   beforeEach(() => {
     cy.visit("/spaces?region=new-york");
@@ -7,21 +13,21 @@ describe("RENAME ME!", () => {
     cy.acceptCookiesIfExists();
   });
   it("User clicks on Icon header", () => {
-    headerPage.clickAndValidateIconHome()
+    clickAndValidateIconHome();
   });
   it("User clicks on CoworkingButton header", () => {
-    headerPage.clickAndValidateCoworkingButton()
+    clickAndValidateCoworkingButton();
   });
   it("User clicks on Office Suites Button", () => {
-    headerPage.clickAndValidateOfficeSuites()
+    clickAndValidateOfficeSuites();
   });
   it("User clicks on Meetings Buttons", () => {
-    headerPage.clickAndValidateMeetingEvents()
+    clickAndValidateMeetingEvents();
   });
   it("User clicks on Virtual Office Button", () => {
-    headerPage.clickAndValidateVirtualOfficeButton()
+    clickAndValidateVirtualOfficeButton();
   });
   it("User clicks on Our Company Button", () => {
-    headerPage.clickAndValidateOurCompanyButton()
+    clickAndValidateOurCompanyButton();
   });
 });
